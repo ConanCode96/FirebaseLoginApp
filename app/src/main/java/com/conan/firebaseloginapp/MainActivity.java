@@ -1,5 +1,6 @@
 package com.conan.firebaseloginapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private List<Country> mCountry = new ArrayList<>();
     private CountryAdapter mAdapter;
 
+    ProgressDialog progressDoalog;
+
     public interface GetDataService {
-        @GET("/rest/v2/all/")
+        @GET("/rest/v2/all")
         Call<List<Country>> getAllCountries();
     }
 
@@ -44,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         signOut_btn = (Button) findViewById(R.id.signOut_btn);
 
         auth = FirebaseAuth.getInstance();
+
+        progressDoalog = new ProgressDialog(MainActivity.this);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.show();
 
         // this listener will be called when there is change in firebase user session
         FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
@@ -89,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Fetched Countries Successfully!!", Toast.LENGTH_SHORT).show();
                 mCountry.addAll(response.body());
                 mAdapter.notifyDataSetChanged();
+                progressDoalog.dismiss();
 //                for(Country c : mCountry)
 //                    System.out.println(c.getName());
             }
@@ -96,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Country>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                progressDoalog.dismiss();
             }
         });
     }
