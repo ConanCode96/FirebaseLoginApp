@@ -1,7 +1,10 @@
 package com.conan.firebaseloginapp;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Country {
 
+    @SerializedName("name")
     private String name;
 
     public Country(){}

@@ -9,11 +9,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class countryAdapter extends RecyclerView.Adapter<countryAdapter.MyViewHolder> {
+public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHolder> {
 
     private List<Country> mCountry;
 
-    public countryAdapter(List<Country> mCountry) {
+    public CountryAdapter(List<Country> mCountry) {
         this.mCountry = mCountry;
     }
 
@@ -37,7 +37,7 @@ public class countryAdapter extends RecyclerView.Adapter<countryAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView name;
+        public TextView name;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.title);
