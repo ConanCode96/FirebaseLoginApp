@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Country> mCountry = new ArrayList<>();
     private CountryAdapter mAdapter;
-
-    ProgressDialog progressDoalog;
+    private ProgressDialog progressDoalog;
 
     public interface GetDataService {
         @GET("/rest/v2/all")
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 auth.signOut();
+
             }
         });
 
