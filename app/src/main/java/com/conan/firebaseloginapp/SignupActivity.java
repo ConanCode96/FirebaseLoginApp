@@ -19,8 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText inputEmail, inputPassword;
-    private Button btnSignIn, btnSignUp, btnResetPassword;
+    private EditText inputEmail, inputPassword, confirmPass;
+    private Button btnSignIn, btnSignUp;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
 
@@ -34,6 +34,7 @@ public class SignupActivity extends AppCompatActivity {
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
+        confirmPass = (EditText) findViewById(R.id.con_password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
@@ -44,6 +45,12 @@ public class SignupActivity extends AppCompatActivity {
 
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
+                String co_password = confirmPass.getText().toString().trim();
+
+                if(!password.equals(co_password)){
+                    confirmPass.setError("Passwords do not match! Please try again!");
+                    return;
+                }
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
