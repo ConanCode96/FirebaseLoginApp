@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +28,7 @@ import retrofit2.http.GET;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button signOut_btn;
+    private FloatingActionButton signOut_btn;
     private FirebaseAuth auth;
     private RecyclerView recyclerView;
     private List<Country> mCountry = new ArrayList<>();
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
 
-        signOut_btn = (Button) findViewById(R.id.signOut_btn);
+        signOut_btn = (FloatingActionButton) findViewById(R.id.signOut_btn);
 
         auth = FirebaseAuth.getInstance();
 
