@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 // Build a GoogleSignInClient with the options specified by gso.
                 GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(MainActivity.this, gso);
                 mGoogleSignInClient.signOut();
+                Toast.makeText(getApplicationContext(), "Logged Out!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Country>>() {
             @Override
             public void onResponse(Call<List<Country>> call, Response<List<Country>> response) {
-                Toast.makeText(MainActivity.this, "Fetched Countries Successfully!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Success!", Toast.LENGTH_SHORT).show();
                 mCountry.addAll(response.body());
                 mAdapter.notifyDataSetChanged();
                 progressDoalog.dismiss();
