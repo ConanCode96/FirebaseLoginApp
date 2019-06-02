@@ -79,31 +79,33 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Configure Facebook Sign In
-        mCallbackManager = CallbackManager.Factory.create();
-        loginButton = findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                loginButton.setEnabled(false);
-                btnLogin.setEnabled(false);
-                btnSignup.setEnabled(false);
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
+        {
+            mCallbackManager = CallbackManager.Factory.create();
+            loginButton = findViewById(R.id.login_button);
+            loginButton.setReadPermissions("email", "public_profile");
+            loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                    loginButton.setEnabled(false);
+                    btnLogin.setEnabled(false);
+                    btnSignup.setEnabled(false);
+                    handleFacebookAccessToken(loginResult.getAccessToken());
+                }
 
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-                // ...
-            }
+                @Override
+                public void onCancel() {
+                    Log.d(TAG, "facebook:onCancel");
+                    // ...
+                }
 
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-                // ...
-            }
-        });
+                @Override
+                public void onError(FacebookException error) {
+                    Log.d(TAG, "facebook:onError", error);
+                    // ...
+                }
+            });
+        }
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);

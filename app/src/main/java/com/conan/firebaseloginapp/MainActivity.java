@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private List<Country> mCountry = new ArrayList<>();
     private CountryAdapter mAdapter;
     private ProgressDialog progressDoalog;
-    private GoogleSignInClient mGoogleSignInClient;
 
     public interface GetDataService {
         @GET("/rest/v2/all")
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
 
-        signOut_btn = (FloatingActionButton) findViewById(R.id.signOut_btn);
+        signOut_btn = findViewById(R.id.signOut_btn);
 
         auth = FirebaseAuth.getInstance();
 
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         signOut_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                auth.signOut();
+                auth.signOut(); //Firebase sign out
 
                 LoginManager.getInstance().logOut(); //Facebook sign out
 
@@ -88,17 +87,9 @@ public class MainActivity extends AppCompatActivity {
                         .requestIdToken(getString(R.string.default_web_client_id))
                         .requestEmail()
                         .build();
-
                 // Build a GoogleSignInClient with the options specified by gso.
-                mGoogleSignInClient = GoogleSignIn.getClient(MainActivity.this, gso);
-
-                mGoogleSignInClient.signOut().addOnCompleteListener(MainActivity.this,
-                        new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-
-                            }
-                        });
+                GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(MainActivity.this, gso);
+                mGoogleSignInClient.signOut();
             }
         });
 
