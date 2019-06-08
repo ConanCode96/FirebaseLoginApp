@@ -1,6 +1,7 @@
 package com.conan.firebaseloginapp;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -224,12 +225,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            Snackbar.make(findViewById(R.id.main_layout), "Authentication Successful!", Snackbar.LENGTH_SHORT).show();
                             login();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
                         }
 
                         // [START_EXCLUDE]
@@ -240,10 +239,17 @@ public class LoginActivity extends AppCompatActivity {
     // [END auth_with_google]
 
     private void login(){
-        Toast.makeText(getApplicationContext(), "Logged In!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+//        Toast.makeText(getApplicationContext(), "Logged In!", Toast.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(R.id.login_layout), "Authentication Successful!", Snackbar.LENGTH_LONG).show();
+        final Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent);
+                finish();
+            }
+        }, 2000);
     }
 
 

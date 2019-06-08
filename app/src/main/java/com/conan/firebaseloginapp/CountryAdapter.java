@@ -1,6 +1,8 @@
 package com.conan.firebaseloginapp;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,13 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         Country c = mCountry.get(i);
         myViewHolder.name.setText(c.getName());
+        final int idx = i;
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view.getRootView().findViewById(R.id.inner_layout), "You clicked on: " + mCountry.get(idx).getName(), Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -42,5 +51,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.title);
         }
+
     }
 }
